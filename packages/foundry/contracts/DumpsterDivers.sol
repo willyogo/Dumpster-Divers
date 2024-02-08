@@ -44,11 +44,11 @@ contract Trash is ERC404 {
                 image = "BLUE.png";
                 color = "Blue";
             } else if (seed <= 210) {
+                image = "GREEN.png";
+                color = "Orange";
+            } else if (seed <= 240) {
                 image = "YELLOW.png";
                 color = "Yellow";
-            } else if (seed <= 240) {
-                image = "ORANGE.png";
-                color = "Orange";
             } else if (seed <= 255) {
                 image = "PINK.png";
                 color = "Pink";
