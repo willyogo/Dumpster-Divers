@@ -25,7 +25,7 @@ contract DeployScript is ScaffoldETHDeploy {
         Trash dd = new Trash(deployerPubKey);
 
         dd.setDataURI(
-            "https://github.com/willyogo/Dumpster-Divers/tree/main/Pre-reveal%20art/"
+            "https://github.com/willyogo/Dumpster-Divers/tree/main/pre-reveal-art/"
         );
 
         dd.setWhitelist(deployerPubKey, true);
