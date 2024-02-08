@@ -3,12 +3,12 @@ pragma solidity ^0.8.19;
 
 // import "../contracts/YourContract.sol";
 import "./DeployHelpers.s.sol";
-import "../contracts/DumpsterDivers.sol";
+import "../contracts/Trash.sol";
 
 contract DeployScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
 
-    address owner = 0x62286D694F89a1B12c0214bfcD567bb6c2951491;
+    address owner; // starts as deployer, set to treasury once deployed
 
     function run() external {
         uint256 deployerPrivateKey = setupLocalhostEnv();
@@ -17,8 +17,23 @@ contract DeployScript is ScaffoldETHDeploy {
                 "You don't have a deployer account. Make sure you have set DEPLOYER_PRIVATE_KEY in .env or use `yarn generate` to generate a new random account"
             );
         }
+        address deployerPubKey = vm.createWallet(deployerPrivateKey).addr;
+
+        owner = deployerPubKey;
+
         vm.startBroadcast(deployerPrivateKey);
-        Trash dd = new Trash(owner);
+        Trash dd = new Trash(deployerPubKey);
+
+        dd.setDataURI(
+            "https://github.com/willyogo/Dumpster-Divers/tree/main/Pre-reveal%20art/"
+        );
+
+        dd.setWhitelist(deployerPubKey, true);
+        if (owner != deployerPubKey) dd.setWhitelist(owner, true);
+        dd.transfer(owner, 10000 * 10 ** 18);
+
+        dd.transferOwnership(owner);
+
         console.logString(
             string.concat(
                 "YourContract deployed at: ",
