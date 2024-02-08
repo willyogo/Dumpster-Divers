@@ -22,14 +22,13 @@ function getFiles(path) {
   });
 }
 function getArtifactOfContract(contractName) {
-  contractName = "DumpsterDivers";
   const current_path_to_artifacts = path.join(
     __dirname,
     "..",
     `out/${contractName}.sol`
   );
   const artifactJson = JSON.parse(
-    fs.readFileSync(`${current_path_to_artifacts}/Trash.json`)
+    fs.readFileSync(`${current_path_to_artifacts}/${contractName}.json`)
   );
 
   return artifactJson;
