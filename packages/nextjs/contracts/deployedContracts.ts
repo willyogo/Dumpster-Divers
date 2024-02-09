@@ -2763,7 +2763,7 @@ const deployedContracts = {
   },
   11155111: {
     Trash: {
-      address: "0x7CfD6dB238d24085FDe794087e2F1b24d25671D0",
+      address: "0xc78ef11dBf95e5CdBc856A1949964775a90b3430",
       abi: [
         {
           type: "constructor",

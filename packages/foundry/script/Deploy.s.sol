@@ -8,7 +8,7 @@ import "../contracts/Trash.sol";
 contract DeployScript is ScaffoldETHDeploy {
     error InvalidPrivateKey(string);
 
-    address owner; // starts as deployer, set to treasury once deployed
+    address owner = 0xBd1413d4C670c0e1957C3338Eadd6535CB1c562d; // starts as deployer, set to treasury once deployed
 
     function run() external {
         uint256 deployerPrivateKey = setupLocalhostEnv();
@@ -28,8 +28,8 @@ contract DeployScript is ScaffoldETHDeploy {
             "ipfs://bafybeiclqcx3kdoauwelxgcny25wauci6qqonfigid6y2wrv4ep4gji3gq/"
         );
 
-        dd.setWhitelist(deployerPubKey, true);
-        if (owner != deployerPubKey) dd.setWhitelist(owner, true);
+        // dd.setWhitelist(deployerPubKey, true);
+        dd.setWhitelist(owner, true);
         dd.transfer(owner, 10000 * 10 ** 18);
 
         dd.transferOwnership(owner);
